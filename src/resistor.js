@@ -145,7 +145,7 @@ function getThreeBandValue(bands) {
  *
  */
 function formatNumber(val) {
-  const metricPrefixes = ['k', 'M', 'G'];
+  const metricPrefixes = ['', 'k', 'M', 'G'];
   let prefixIndex = 0;
 
   while (val >= 1000 && prefixIndex < metricPrefixes.length - 1) {
@@ -153,8 +153,8 @@ function formatNumber(val) {
     prefixIndex++;
   }
 
-  return prefixIndex === 0 ? val.toFixed(0) : val.toFixed(1);
-
+  return val + metricPrefixes[prefixIndex];
+}
 /**
  * Returns the tolerance of the resistor according to its color value
  * @param {string} color - the color of the tolerance band to
@@ -175,6 +175,11 @@ function getTolerance(color) {
     brown: '±1%',
     red: '±2%',
     green: '±0.5%',
+    blue: '±0.25%',
+    violet: '±0.1%',
+    grey: '±0.05%',
+    gold: '±5%',
+    silver: '±10%',
   };
   return toleranceCodes[color];
 }
